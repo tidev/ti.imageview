@@ -49,9 +49,13 @@ For adding requestHeaders for a specific image you add a `requestHeaders` proper
 These requestHeaders will be automatically picked up and used in fetching the image. Keep in mind, if you set requestHeaders globally those won't be used if you set them inside an imageView. So this is just a way to override the global headers.
 
 ## Using your own xhr library
-So for example, if you already use [ti.xhr](https://www.npmjs.com/package/ti.xhr) in your app, and you've already have that configured to use the right requestHeaders, you might as well want to use that module so you don't have to configure your requestHeaders twice.
 
-You can set that up by using the `setHttpHandler` property exposed in the module. This method will be called with a url and a callback method. In case of `ti.xhr` you can set it up like this:
+
+You can set that up by using the `setHttpHandler` property exposed in the module. This method will be called with a url and a callback method. In case of `ti.xhr` you can set it up as shown in the snippet below. The callback function expects an [ImageView.image](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ImageView-property-image) supported property back. 
+
+### ti.xhr example
+
+So for example, if you already use [ti.xhr](https://www.npmjs.com/package/ti.xhr) in your app, and you've already have that configured to use the right requestHeaders, you might as well want to use that module so you don't have to configure your requestHeaders twice.
 
 ```js
 //ti.xhr sample
