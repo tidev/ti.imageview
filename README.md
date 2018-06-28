@@ -2,6 +2,11 @@
 
 ti.imageview is an extension on top of the existing Ti.UI.createImageView method. It allows you to add requestHeaders to fetching of an image, or pass the fetching of the image to your xhr library of choice. 
 
+## General notice
+When using ti.imageview, all images going through it will be downloaded using a xhr request and will not follow the default downloading and caching method build into the platforms natively. If you don't need any of the functionalities provided by ti.imageview it is recommended not to use this. 
+
+ti.imageview also doesn't work with local images or blobs. Only use it when your images are remote.
+
 ## How to use it
 Install ti.imageview by running the npm command below in your `lib` folder in alloy, or in classic run it in your `Resources` folder.
 
@@ -50,8 +55,9 @@ These requestHeaders will be automatically picked up and used in fetching the im
 
 ## Using your own xhr library
 
+You can set that up by using the `setHttpHandler` property exposed in the module. This method will be called with a url and a callback method. In case of `ti.xhr` you can set it up as shown in the snippet below. The callback function expects an [ImageView.image](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ImageView-property-image) supported property back.
 
-You can set that up by using the `setHttpHandler` property exposed in the module. This method will be called with a url and a callback method. In case of `ti.xhr` you can set it up as shown in the snippet below. The callback function expects an [ImageView.image](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ImageView-property-image) supported property back. 
+When using your own xhr library, keep in mind the requestHeaders you might've provided as described above, will not be used. You're responsible of setting this up yourself in your own xhr library. 
 
 ### ti.xhr example
 
