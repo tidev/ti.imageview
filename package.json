@@ -1,0 +1,15 @@
+{
+  "name": "ti.imageview",
+  "version": "1.0.0",
+  "description": "A simple extension to add requestHeaders to ImageViews",
+  "main": "ti.imageview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "titanium-module",
+    "titanium"
+  ],
+  "author": "Appcelerator/Rene Pot",
+  "license": "Apache-2.0"
+}
