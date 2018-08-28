@@ -9,8 +9,6 @@ When using this module, all images going through it will be downloaded using a X
 the default downloading and caching method build into the platforms natively. If you don't need any of the 
 functionalities provided by this module, it is recommended not to use this. 
 
-Currently, this module also does not work with local images or blobs. Only use it when your images are remote.
-
 ## Usage
 
 Install Ti.ImageView by running the NPM command below in your `lib` folder in alloy, or in classic run it 
