@@ -35,12 +35,12 @@ require('ti.imagecache').createImageView(args);
 ## Global Request Headers
 
 The easiest way to set request headers is setting them globally. Just run the code below in `alloy.js` or any 
-other file you know is called before the images are requested, and all images will be using those headers to fetch images. 
+other file you know is called before the images are requested, and all images will be using those headers to fetch images. It is still possible to manually override this property for every ImageView where you want.
 
 ```js
-require('ti.imageview').setRequestHeaders({
+require('ti.imageview').defaultRequestHeaders = {
   'User-Agent': 'TiRocks'
-});
+};
 ```
 
 Of course they can be changed at any point in time, and from then on the new values will be used.
@@ -58,9 +58,8 @@ For adding requestHeaders for a specific image you add a `requestHeaders` proper
 }
 ```
 
-These request headers will be automatically picked up and used in fetching the image. Keep in mind, if you set 
-request headers globally, those won't be used if you set them inside an imageView. So this is just a way to 
-override the global headers.
+These request headers will be automatically picked up and used in fetching the image. Keep in mind, if you have set 
+request headers globally, those will be ignored, and the headers provided inside the ImageView will be used instead. There is no merging of headers.
 
 ## Using Your Own XHR-Library
 
@@ -79,18 +78,23 @@ configured to use the right request headers, you might as well want to use that 
 request headers twice.
 
 ```js
-require('ti.imageview').setHttpHandler(function (url, cb) {
+require('ti.imageview').httpHandler = function (url, cb) {
   xhr.GET({
     url : url,
     onSuccess : function (e) {
       cb(e.data);
     }
   });
-});
+};
 ```
 Assuming you've already set up the requestHeaders with `ti.xhr` you don't have to do anything else besides the above. 
 Now this method will be called every time an image needs downloading. 
 
+## Debug mode
+It is also possible to enable debug mode for this module. Just set the debug property to `true`.
+```js
+require('ti.imageview').debug = true;
+```
 ## License
 
 Apache 2.0
