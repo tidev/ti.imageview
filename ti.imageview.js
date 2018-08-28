@@ -2,17 +2,8 @@ var storedHeaders = [];
 var httpHandler;
 var debug = false;
 
-function log(value){
+function log(value) {
   if (debug) Ti.API.info(value);
-}
-
-/*
- * Allow overriding the http handler. This means, if you already use a 3rd party http module
- * you can hook it into this module. This is especially powerful if your http module
- * already is configured with requestHeaders, so you don't need to do work twice
- */
-function setHttpHandler(handler) {
-  httpHandler = handler;
 }
 
 /*
@@ -20,13 +11,20 @@ function setHttpHandler(handler) {
  */
 function createImageView(args) {
   log('creating ImageView for ' + args.image);
-  var url = args.image;
-  delete args.image;
+  var url = false;
+  if (args.image.indexOf('http') === 0) {
+    url = args.image;
+    delete args.image;
+  }
   var imageView = Ti.UI.createImageView(args);
-  fetchImage(url, args.requestHeaders ? args.requestHeaders : storedHeaders, function(blob) {
-    imageView.image = blob;
-  });
-
+  
+  
+  if (url) { 
+    fetchImage(url, args.requestHeaders ? args.requestHeaders : storedHeaders, function(blob) {
+      imageView.image = blob;
+    });
+  }
+  
   return imageView;
 }
 
@@ -62,7 +60,11 @@ function fetchImage(url, headers, cb) {
 
 }
 
-// exports getter/setter for httpHandler
+/*
+ * Allow overriding the http handler. This means, if you already use a 3rd party http module
+ * you can hook it into this module. This is especially powerful if your http module
+ * already is configured with requestHeaders, so you don't need to do work twice
+ */
 Object.defineProperty(exports, "httpHandler", {
   get : function() {
     return httpHandler;
