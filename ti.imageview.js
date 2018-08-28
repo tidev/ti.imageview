@@ -12,7 +12,7 @@ function log(value) {
 function createImageView(args) {
   log('creating ImageView for ' + args.image);
   var url = false;
-  if (args.image.indexOf('http') === 0) {
+  if (args.image && args.image.indexOf('http') === 0) {
     url = args.image;
     delete args.image;
   }
