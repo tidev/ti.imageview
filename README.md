@@ -27,7 +27,7 @@ Then use it in your alloy project like this
 In your classic project, you can use it by doing a simple require
 
 ```js
-require('ti.imagecache').createImageView(args);
+require('ti.imageview').createImageView(args);
 ```
 
 ## Global Request Headers
