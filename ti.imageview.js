@@ -17,14 +17,14 @@ function createImageView(args) {
     delete args.image;
   }
   var imageView = Ti.UI.createImageView(args);
-  
-  
-  if (url) { 
+
+
+  if (url) {
     fetchImage(url, args.requestHeaders ? args.requestHeaders : storedHeaders, function(blob) {
       imageView.image = blob;
     });
   }
-  
+
   return imageView;
 }
 
@@ -38,11 +38,11 @@ function fetchImage(url, headers, cb) {
     return httpHandler(url, cb);
 
   var client = Ti.Network.createHTTPClient({
-    onload : function(e) {
+    onload: function(e) {
       cb(this.responseData);
       log('fetched image ' + url);
     },
-    onerror : function(e) {
+    onerror: function(e) {
       e.url = this.url;
       log('fetching image failed');
       Ti.API.error('ti.imagecache: unable to download image');
@@ -50,7 +50,7 @@ function fetchImage(url, headers, cb) {
     }
   });
 
-  client.open("GET", url);
+  client.open('GET', url);
 
   _.each(headers, function(value, name) {
     client.setRequestHeader(name, value);
@@ -65,33 +65,33 @@ function fetchImage(url, headers, cb) {
  * you can hook it into this module. This is especially powerful if your http module
  * already is configured with requestHeaders, so you don't need to do work twice
  */
-Object.defineProperty(exports, "httpHandler", {
-  get : function() {
+Object.defineProperty(exports, 'httpHandler', {
+  get: function() {
     return httpHandler;
   },
-  set : function(handler) {
+  set: function(handler) {
     httpHandler = handler;
     log('updating httpHandler');
   },
 });
 
 // exports getter/setter for default requestHeaders
-Object.defineProperty(exports, "defaultRequestHeaders", {
-  get : function() {
+Object.defineProperty(exports, 'defaultRequestHeaders', {
+  get: function() {
     return storedHeaders;
   },
-  set : function(requestHeaders) {
+  set: function(requestHeaders) {
     storedHeaders = requestHeaders;
     log('setting default requestHeaders to ' + JSON.stringify(requestHeaders));
   },
 });
 
 // exports getter/setter for updating the debug state
-Object.defineProperty(exports, "debug", {
-  get : function() {
+Object.defineProperty(exports, 'debug', {
+  get: function() {
     return debug;
   },
-  set : function(state) {
+  set: function(state) {
     debug = state;
     Ti.API.info('setting debug state to ' + state);
   },
