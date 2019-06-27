@@ -52,9 +52,9 @@ function fetchImage(url, headers, cb) {
 
   client.open('GET', url);
 
-  _.each(headers, function(value, name) {
-    client.setRequestHeader(name, value);
-  });
+  for (var name in headers) {
+    client.setRequestHeader(name, headers[name]);
+  }
 
   client.send();
 
@@ -98,3 +98,4 @@ Object.defineProperty(exports, 'debug', {
 });
 
 exports.createImageView = createImageView;
+
